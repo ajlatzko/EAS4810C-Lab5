@@ -58,9 +58,6 @@ for i = 1:numel(var_names)
 end
 clear alpha alphas i key keys name parts pos prefix result_cells var var_names;
 
-%% FILTER DATA HERE
-
-
 %% Compute mean and uncertainty for each run
 
 % FORMAT:
@@ -90,3 +87,26 @@ for i = 1:numel(vars)
     end
 end
 clear i j raw_data vars var_name data;
+
+%% Integrate over the surface of the airfoil to get lift and drag
+
+% Get dx and dy between the ports. Estimate the line as the hypotenuse of
+% dx and dy (Lstar = sqrt(dx^2 + dy^2)). Get angle between the port and the
+% chord (theta = atan(dy/dx)). Get angle between pressure port and freestream
+% velocity (gamma = theta - alpha).
+%
+% Calculate lift and drag at each port:
+% L' = P*Lstar*cos(gamma)
+% D' = P*Lstar*sin(gamma)
+% STOP HERE
+% Then sum all the lifts and drags across all ports at a given alpha
+% Then combine the response of the positive and negative alpha
+
+%% Calculate moments
+
+% Mx: distance from port to quater chord point (distance will be positive and negative)
+% My: interpolate y for each port
+
+%% Calculate aerodynamic center
+
+% iterate quarter chord point until M -> 0
