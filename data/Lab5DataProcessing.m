@@ -85,6 +85,7 @@ for i = 1:numel(vars)
         % Update the cell array in the workspace
         assignin('base', var_name, data);
     end
+    a{i} = evalin('base', var_name);
 end
 clear i j raw_data vars var_name data;
 
@@ -101,6 +102,39 @@ clear i j raw_data vars var_name data;
 % STOP HERE
 % Then sum all the lifts and drags across all ports at a given alpha
 % Then combine the response of the positive and negative alpha
+
+% Calculate x and y positions
+t = 12/100; % Maximum thickness of 0012 airfoil
+xpos = [0.1542; 0.3674; 0.7865; 1.2008; 1.6065; 2.0133; 2.4150; 2.8143; 3.2117; 4];
+x_c = xpos/4;
+y_c = 5*t*(0.2969*sqrt(x_c) - 0.1260*x_c - 0.3516*x_c.^2 + 0.2843*x_c.^3 - 0.1015*x_c.^4);
+ypos = y_c*4;
+dx = diff(xpos);
+dy = diff(ypos);
+
+alpha_pos = [0; 2; 5; 7; 8; 10; 11; 12; 14];
+alpha_neg = [-14; -12; -11; -10; -9; -7; -5; -2; 0];
+Lstar = sqrt(dx.^2 + dy.^2);
+theta = atan(dy./dx);
+for alpha = 1:length(alpha_pos)
+    for i = 1:length(dx)
+        gamma_pos(i,alpha) = theta(i) - alphas(alpha);
+    end
+end
+for alpha = 1:length(alpha_neg)
+    for i = 1:length(dx)
+        gamma_neg(i,alpha) = theta(i) - alphas(alpha);
+    end
+end
+
+for alpha = 1:length(alphas)
+    for i = 1:length(dx)
+        Lprime(i,alpha) = a{alpha}{i,2}*Lstar(i)*cos(gamma(i,alpha));
+        Dprime(i,alpha) = a{alpha}{i,2}*Lstar(i)*sin(gamma(i,alpha));
+    end
+    L(alpha) = sum(Lprime(:,alpha), 1);
+    D(alpha) = sum(Dprime(:,alpha), 1);
+end
 
 %% Calculate moments
 
