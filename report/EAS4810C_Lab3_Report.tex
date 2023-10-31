@@ -1,0 +1,241 @@
+\documentclass[journal,letterpaper]{IEEEtran}
+\usepackage[letterpaper, left=0.65in, right=0.65in, bottom=0.7in, top=0.7in]{geometry}
+\usepackage{stix}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[none]{hyphenat}
+\usepackage[hidelinks]{hyperref}
+\usepackage{import}
+\usepackage{transparent}
+\usepackage{microtype}
+
+\graphicspath{ {./figures/} }
+
+\pgfplotsset{compat=1.18}
+
+\setlength{\columnsep}{0.2in}
+\setlength{\columnwidth}{3.5in}
+
+\newlength\fheight
+\newlength\fwidth
+\setlength\fwidth{3.25in}
+\setlength\fheight{0.8\fwidth}
+
+\newcommand{\incfig}[1]{%
+    \centering
+    \def\svgwidth{3.5in}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\renewcommand{\arraystretch}{1.3}
+
+\sisetup{per-mode = symbol,
+         inter-unit-product = \ensuremath{ { } \cdot { } },
+         number-unit-product = \text{ },
+         group-digits = false,
+         detect-weight = true,
+         detect-inline-weight = math,
+         detect-display-math = true}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{\thepage}
+\lhead{Section 11832 Lab 5}
+
+\begin{document}
+\title{Comparing NACA0012 Characteristics Using Pressure Taps in a Wind Tunnel}
+
+\author{\IEEEauthorblockN{\LARGE{Borg, Auston J. \quad Lam, Brandon H. \quad Latzko, Alexander J. \\}}
+\IEEEauthorblockA{
+Section 11832 \quad October 31, 2023}
+}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+
+\section{Introduction}
+
+
+\IEEEPARstart{I}{ntro}
+
+
+\section{Procedure}
+
+\subsection{s1}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3.5in]{testSection}
+    \caption{Wind tunnel test section with NACA0012 airfoil installed. The airfoil is oriented at an angle of attack of zero degrees.}
+    \label{fig:section}
+\end{figure}
+
+
+\section{Results}
+
+
+The ambient pressure, $P_\text{amb}$, of the room was measured using a wall-mounted barometer.
+The temperature, $T$, and the relative humidity, $\varphi$, of the room was measured using a digital thermometer and hygrometer placed next to the test section.
+The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
+
+\begin{table}[H]
+    \centering
+    \caption{Atmospheric Conditions}
+    \renewcommand{\arraystretch}{1.105}
+    \begin{tabular}{ccc}
+    \toprule
+    Parameter & Value & Uncertainty ($\pm$) \\ \midrule \midrule
+    $P_\text{amb}$ & \qty{767.70}{mm\ce{Hg}} & \qty{0.02}{mm\ce{Hg}} \\
+    $T$ & \qty{21.1}{\celsius} & \qty{0.1}{\celsius} \\
+    $\varphi$ & 49\% & 1\% \\ \bottomrule
+    \end{tabular}
+    \label{tab:atmCond}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/cal.tex}
+    \caption{Hot wire anemometer calibration curve.}
+    \label{fig:cal}
+\end{figure}
+
+
+\section{Discussion}
+
+
+\begin{figure}[H]
+    \centering
+    %\input{figures/CD.tex}
+    \caption{Calibration graph for voltage velocity relation.}
+    \label{fig:calCurve}
+\end{figure}
+
+
+\section{Conclusion}
+
+
+
+
+
+\section*{Appendix A: Uncertainty Calculations}
+
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.7}
+    \centering
+    \caption{Summary of Measurement Uncertainties}
+    \begin{tabular}{cccc}
+    \toprule
+    Parameter & Symbol & Justification & Uncertainty ($\pm$) \\ \midrule \midrule
+    Temperature & $\mu T$ & Digital & \qty{0.1}{\celsius} \\
+    Humidity & $\mu \varphi$ & Digital & 1\% \\
+    Ambient Pressure & $\mu P_\text{amb}$ & Barometer & \qty{0.02}{\mm} \\
+    \makecell{Static Pressure \\ Difference} & $\mu \Delta P$ & \makecell{95\% Conf. Int.} & Variable \\
+    Voltage & $\mu V$ & 95\% Conf. Int. & Variable \\
+    Dynamic Pressure & $\mu q$ & RSS & Variable \\
+    Saturation Pressure & $\mu P_g$ & RSS & \qty{16}{\pascal} \\
+    Density & $\mu \rho$ & RSS & \qty{0.004}{\kg\per\m\cubed} \\
+    Calibration Velocity & $\mu v_c$ & RSS & $\sim \qty{0.04}{\m\per\s}$ \\
+    Interpolated Velocity & $\mu v$ & \makecell{Largest \\ Percent Error} & 0.5\% \\
+    Freestream Velocity & $\mu U_\infty$ & RSS & \qty{0.04}{\m\per\s} \\
+    Characteristic Length & $\mu L$ & Ruler & \qty{0.5}{\mm} \\
+    Kinematic Viscosity & $\mu \nu$ & \cite{HeatTrans} & \qty{2e-9}{\m\squared\per\s} \\
+    Reynolds Number & $\mu Re$ & RSS & 938 \\
+    Height & $\mu h$ & Ruler & \qty{0.05}{\cm} \\
+    Instantaneous Velocity & $\mu U_2$ & 95\% Conf. Int. & Variable \\
+    Drag Force & $\mu F_D$ & RSS & \qty{0.070}{\newton} \\
+    Coefficient of Drag & $\mu v$ & RSS & 0.065 \\ \bottomrule
+    \end{tabular}
+    \label{tab:uncertainty}
+\end{table}
+
+The uncertainties for each measured value are summarized in Table~\ref{tab:uncertainty}.
+First, the systemic bias in the reading of the transducer pressures and the voltage readings was accounted for by zeroing the respective values in the LabVIEW VI.
+The random uncertainty for each reading was then obtained by using a 95\% confidence interval with a normal distribution.
+Because a sample size of 20000 was used for each reading, it was determined to be sufficiently large that the sample distribution approached the normal distribution according to the central limit theorem~\cite{MoMLecture}.
+A $z^*$ value of 1.96 was used for the calculation of the 95\% confidence interval~\cite{MoMLecture}.
+The margin of error then served as the uncertainty as seen in~\eqref{eq:conf}, where $\mu X$ is the margin of error for an arbitrary measurement, $S_x$ is the sample standard deviation, and $n$ is the number of samples~\cite{MoMLecture}.
+
+\begin{equation} \label{eq:conf}
+    \mu X = z^* \frac{S_x}{\sqrt{n}}
+\end{equation}
+
+The uncertainties in the calculated dynamic pressures, $q$, were then calculated using the root sum squared (RSS) method as seen in~\eqref{eq:uq}, where $\Delta P$ is the change in stagnation pressure and $k$ is the tunnel calibration coefficient that was determined in the first lab experiment~\cite{MoMLecture}.
+
+\begin{equation} \label{eq:uq}
+    \mu q = \left[\left(\mu \Delta P \frac{\partial q}{\partial \Delta P}\right)^2 + \left(\mu k \frac{\partial q}{\partial k}\right)^2\right]^{1/2}
+\end{equation}
+
+The uncertainty in the saturation pressure, $P_g$, was determined using error propagation theory as seen in~\eqref{eq:uPsat}, where $T$ is the ambient temperature~\cite{errorprop}.
+
+\begin{equation} \label{eq:uPsat}
+    \mu P_g = \mu T \frac{\partial P_g}{\partial T}
+\end{equation}
+
+The uncertainty in the fluid density, $\rho$, was calculated using the RSS method as seen in~\eqref{eq:uRho}, where $P$ is the ambient pressure, $T$ is the ambient temperature, $\varphi$ is the relative humidity, and $P_g$ is the saturation pressure~\cite{MoMLecture}.
+
+\begin{equation} \label{eq:uRho}
+    \resizebox{227pt}{!}{$\displaystyle{\mu \rho = \left[\left(\mu P \frac{\partial \rho}{\partial P}\right)^2 + \left(\mu T \frac{\partial \rho}{\partial T}\right)^2 + \left(\mu \varphi \frac{\partial \rho}{\partial \varphi}\right)^2 + \left(\mu P_g \frac{\partial \rho}{\partial P_g}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+The uncertainty for the fluid velocity used in the calibration of the hot wire anemometer, $v_c$, was then calculated using the RSS method as seen in~\eqref{eq:uv}, where $q$ is the dynamic pressure, $\rho$ is the fluid density, and $V$ is voltage from the hot wire anemometer obtained from the fourth-order polynomial fit~\cite{MoMLecture}.
+
+\begin{equation} \label{eq:uv}
+    \mu v_c = \left[\left(\mu q \frac{\partial v_c}{\partial q}\right)^2 + \left(\mu \rho \frac{\partial v_c}{\partial \rho}\right)^2 + \left(\mu V \frac{\partial v_c}{\partial V}\right)^2\right]^{1/2}
+\end{equation}
+
+Then, to obtain the uncertainty for the interpolated fluid velocities, $v$, the greatest percent error from the calibration of the hot wire anemometer was used to simulate the worst-case deviation for all the interpolated velocities using the calibration curve.
+
+The uncertainty for the Reynolds number, $Re$, was calculated using the RSS method as seen in~\eqref{eq:uRe}, where $U_\infty$ is the freestream velocity, $\nu$ is the dynamic viscosity of the fluid, and $L$ is the characteristic length~\cite{HeatTrans}.
+
+\begin{equation} \label{eq:uRe}
+    \resizebox{227pt}{!}{$\displaystyle{\mu Re = \left[\left(\mu \nu \frac{\partial Re}{\partial \nu}\right)^2 + \left(\mu U_\infty \frac{\partial Re}{\partial U_\infty}\right)^2 + \left(\mu L \frac{\partial Re}{\partial L}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+To obtain the uncertainties for the instantaneous velocity, a 95\% confidence interval was used.
+The sample size of the data was larger than 1000, so a normal distribution was used.
+For a 95\% confidence interval, the corresponding $z^*$ value of 1.96 was used~\cite{MoMLecture}.
+Using~\eqref{eq:conf}, the uncertainty in each velocity was found.
+
+The uncertainty in the drag force, $F_D$, was calculated using the RSS method as seen in~\eqref{eq:uFD}, where $q$ is the dynamic pressure, $h$ is the height of the velocity profile, $U_2 (y)$ is the instantaneous velocity, and $U_\infty$ is the freestream velocity.
+
+\begin{equation} \label{eq:uFD}
+    \resizebox{227pt}{!}{$\displaystyle{\mu F_D = \left[\left(\mu U_\infty \frac{\partial F_D}{\partial U_\infty}\right)^2 + \left(\mu q \frac{\partial F_D}{\partial q}\right)^2 + \left(\mu h \frac{\partial F_D}{\partial h}\right)^2 + \left(\mu U_2 (y) \frac{\partial F_D}{\partial U_2 (y)}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+The uncertainty in the drag coefficient, $C_D$, was calculated using the RSS method as seen in~\eqref{eq:uCD}, where $q$ is the dynamic pressure, $F_D$ is the drag force, and $L$ is the characteristic length.
+
+\begin{equation} \label{eq:uCD}
+    \resizebox{227pt}{!}{$\displaystyle{\mu C_D = \left[\left(\mu F_D \frac{\partial C_D}{\partial F_D}\right)^2 + \left(\mu q \frac{\partial C_D}{\partial q}\right)^2 + \left(\mu L \frac{\partial C_D}{\partial L}\right)^2\right]^{1/2}}$}
+\end{equation}
+
+\noindent
+This lab report was typeset using \LaTeX.
+
+\begin{thebibliography}{99}
+    \bibitem{HeatTrans} Bergman, T. L., and Lavine, A. S., ``Appendix A: Thermophysical Properties of Matter,'' \textit{Fundamentals of Heat and Mass Transfer}, Wiley, Hoboken, NJ, 2017, p. 911.
+    \bibitem{MoMLecture} Ridgeway, S., ``MOM\_lab Uncertainty basics w tension,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/447927/files/65674680}, 2022.
+    \bibitem{errorprop} Ku, H. H., ``Notes on the Use of Propagation of Error Formulas'', \textit{Journal of Research of the National Bureau of Standards}, Vol. 70C, No. 4, 27 May 1966, pp. 263--273.
+\end{thebibliography}
+
+\end{document}

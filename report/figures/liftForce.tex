@@ -1,0 +1,42 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\fwidth,
+height=\fheight,
+at={(0\fwidth,0\fheight)},
+scale only axis,
+xmin=0,
+xmax=14,
+xlabel style={font=\color{white!15!black}},
+xlabel={Angle of Attack (deg)},
+ymin=0,
+ymax=80,
+ylabel style={font=\color{white!15!black}},
+ylabel={Lift Force (N)},
+axis background/.style={fill=white},
+axis x line*=bottom,
+axis y line*=left,
+xmajorgrids,
+ymajorgrids
+]
+\addplot [color=black, only marks, mark size=2.5pt, mark=*, mark options={solid, black}, forget plot]
+  table[row sep=crcr]{%
+0	0\\
+3	27.35742964\\
+5	38.72684467\\
+7	49.70505638\\
+8	55.98542969\\
+9	66.32375174\\
+10	73.4976954\\
+11	65.60831974\\
+12	63.19365752\\
+13	61.79559985\\
+};
+\end{axis}
+\end{tikzpicture}%
