@@ -177,7 +177,7 @@ xlabel('Angle of Attack (deg)')
 legend({'Uncorrected','Corrected','XFOIL'},'Location','northwest')
 grid on;
 box off;
-%matlab2tikz('CD.tex','height','\fheight','width','\fwidth')
+matlab2tikz('CD.tex','height','\fheight','width','\fwidth')
 
 %% Plot CL stuff vs alpha
 
@@ -444,3 +444,58 @@ if plotFigure
     grid on;
 end
 matlab2tikz('monteLiftCor.tex','height','\fheight','width','\fwidth')
+
+%% Plot velocity profile
+
+clc; clear; close all;
+
+pos = [-8.0
+-7.0
+-6.0
+-5.0
+-4.0
+-3.0
+-2.0
+-1.0
+0.0
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+1.0
+-0.9];
+
+Vel = [17.63302121
+17.66766483
+17.57029602
+17.36951483
+17.09044626
+16.76010295
+15.86014131
+14.5694144
+14.01914389
+15.00864139
+16.22321569
+16.80958078
+17.15024428
+17.41338612
+17.52997475
+17.53175424
+17.57363723
+15.0918459
+14.46785862];
+
+err = 0.04*ones(size(Vel));
+
+figure;
+hold on;
+errorbar(Vel,pos,err,'k.','MarkerSize',20);
+ylabel('Position (cm)')
+xlabel('Velocity (m/s)')
+grid on;
+box off;
+matlab2tikz('vProfile.tex','height','\fheight','width','\fwidth')

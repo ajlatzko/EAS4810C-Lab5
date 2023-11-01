@@ -1,0 +1,52 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.958\fwidth,
+height=\fheight,
+at={(0\fwidth,0\fheight)},
+xmin=12,
+xmax=18,
+xlabel style={font=\color{white!15!black}\small},
+xlabel={Velocity (m/s)},
+ymin=-10,
+ymax=10,
+ylabel style={font=\color{white!15!black}\small},
+ylabel={Position (cm)},
+axis background/.style={fill=white},
+axis x line*=bottom,
+axis y line*=left,
+xmajorgrids,
+ymajorgrids,
+tick label style={font=\small}
+]
+\addplot [color=black, only marks, mark size=1.5pt, mark=*, mark options={solid, black}, forget plot]
+ plot [error bars/.cd, y dir=both, y explicit, error bar style={line width=0.5pt}, error mark options={line width=0.5pt, mark size=3.0pt, rotate=0}]
+ table[row sep=crcr, y error plus index=2, y error minus index=3]{%
+17.63302121	-8	0.04	0.04\\
+17.66766483	-7	0.04	0.04\\
+17.57029602	-6	0.04	0.04\\
+17.36951483	-5	0.04	0.04\\
+17.09044626	-4	0.04	0.04\\
+16.76010295	-3	0.04	0.04\\
+15.86014131	-2	0.04	0.04\\
+14.5694144	-1	0.04	0.04\\
+14.01914389	0	0.04	0.04\\
+15.00864139	1	0.04	0.04\\
+16.22321569	2	0.04	0.04\\
+16.80958078	3	0.04	0.04\\
+17.15024428	4	0.04	0.04\\
+17.41338612	5	0.04	0.04\\
+17.52997475	6	0.04	0.04\\
+17.53175424	7	0.04	0.04\\
+17.57363723	8	0.04	0.04\\
+15.0918459	1	0.04	0.04\\
+14.46785862	-0.9	0.04	0.04\\
+};
+\end{axis}
+\end{tikzpicture}%
