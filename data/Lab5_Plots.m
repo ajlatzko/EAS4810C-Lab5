@@ -26,10 +26,12 @@ a = [0
 11
 12
 13];
-    
+
+err = 0.3*ones(size(a));
+
 figure;
 hold on;
-plot(a,Fd,'k.','MarkerSize',15);
+errorbar(a,Fd,err,'both','k.','MarkerSize',15);
 ylabel('Drag Force (N)')
 xlabel('Angle of Attack (deg)')
 grid on;
@@ -61,10 +63,12 @@ a = [0
 11
 12
 13];
-    
+
+err = 2*ones(size(a));
+
 figure;
 hold on;
-plot(a,Fl,'k.','MarkerSize',15);
+errorbar(a,Fl,err,'both','k.','MarkerSize',15);
 ylabel('Lift Force (N)')
 xlabel('Angle of Attack (deg)')
 grid on;
@@ -96,10 +100,12 @@ a = [0
 11
 12
 13];
-    
+
+err = 0.1*ones(size(a));
+
 figure;
 hold on;
-plot(a,M,'k.','MarkerSize',15);
+errorbar(a,M,err,'both','k.','MarkerSize',15);
 ylabel('Moment (Nm)')
 xlabel('Angle of Attack (deg)')
 grid on;
@@ -154,6 +160,8 @@ acor = [0
 12.17634195
 13.1769283];
 
+err = 0.03*ones(size(a));
+
 CD0012 = load('CD_0012.txt','ascii');
 
 orange = '#FA4616';
@@ -161,15 +169,15 @@ blue = '#0021A5';
 
 figure;
 hold on;
-plot(a,CDun,'^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
-plot(acor,CDcor,'square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
+errorbar(a,CDun,err,'both','^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
+errorbar(acor,CDcor,err,'both','square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
 plot(CD0012(:,1),CD0012(:,2),'k-','LineWidth',1.25);
 ylabel('C_D')
 xlabel('Angle of Attack (deg)')
-legend({'Experimental Without Correction','Experimental With Correction','XFOIL'},'Location','northwest')
+legend({'Uncorrected','Corrected','XFOIL'},'Location','northwest')
 grid on;
 box off;
-matlab2tikz('CD.tex','height','\fheight','width','\fwidth')
+%matlab2tikz('CD.tex','height','\fheight','width','\fwidth')
 
 %% Plot CL stuff vs alpha
 
@@ -219,6 +227,8 @@ acor = [0
 12.17634195
 13.1769283];
 
+err = 0.07*ones(size(a));
+
 CL0012 = load('CL_0012.txt','ascii');
 
 orange = '#FA4616';
@@ -226,12 +236,12 @@ blue = '#0021A5';
 
 figure;
 hold on;
-plot(a,CLun,'^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
-plot(acor,CLcor,'square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
+errorbar(a,CLun,err,'both','^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
+errorbar(acor,CLcor,err,'both','square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
 plot(CL0012(:,1),CL0012(:,2),'k-','LineWidth',1.25);
 ylabel('C_L')
 xlabel('Angle of Attack (deg)')
-legend({'Experimental Without Correction','Experimental With Correction','XFOIL'},'Location','northwest')
+legend({'Uncorrected','Corrected','XFOIL'},'Location','northwest')
 grid on;
 box off;
 matlab2tikz('CL.tex','height','\fheight','width','\fwidth')
@@ -284,6 +294,8 @@ acor = [0
 12.17634195
 13.1769283];
 
+err = 0.005*ones(size(a));
+
 CM0012 = load('CM_0012.txt','ascii');
 
 orange = '#FA4616';
@@ -291,12 +303,144 @@ blue = '#0021A5';
 
 figure;
 hold on;
-plot(a,CMun,'^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
-plot(acor,CMcor,'square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
+errorbar(a,CMun,err,'both','^','MarkerEdgeColor',orange,'MarkerFaceColor',orange);
+errorbar(acor,CMcor,err,'both','square','MarkerEdgeColor',blue,'MarkerFaceColor',blue);
 plot(CM0012(:,1),CM0012(:,2),'k-','LineWidth',1.25);
 ylabel('C_M')
 xlabel('Angle of Attack (deg)')
-legend({'Experimental Without Correction','Experimental With Correction','XFOIL'},'Location','northwest')
+legend({'Uncorrected','Corrected','XFOIL'},'Location','northwest')
 grid on;
 box off;
 matlab2tikz('CM.tex','height','\fheight','width','\fwidth')
+
+%% Monte Carlo for uncorrected lift slope uncertainty
+
+clc; clear; close all;
+
+CL =   [0
+0.336668611
+0.476583991
+0.611685107
+0.688973236];
+
+UCL = 0.07*ones(size(CL));
+
+a = [0
+3
+5
+7
+8];
+
+Ua = 0.1*ones(size(a));
+
+plotFigure = true;
+
+coeff = polyfit(CL,a,1);
+originalSlope = coeff(1)
+numPts = 10000;
+
+% Use parfor to speed up computation if necessary
+for i = 1:numPts
+    xptemp = zeros(1, length(CL));
+    yptemp = zeros(1, length(CL));
+    for j = 1:length(CL)
+        xptemp(j) = norminv(rand,a(j),Ua(j)/2);
+        yptemp(j) = norminv(rand,CL(j),UCL(j)/2);
+    end
+    coeff = polyfit(xptemp,yptemp,1);
+    slope(i) = coeff(1);
+    ap(i,:) = xptemp;
+    CLp(i,:) = yptemp;
+end
+
+avgSlope = mean(slope)
+stdDevSlope = std(slope)
+uncertainty = 1.96*(stdDevSlope/sqrt(numPts))
+
+if plotFigure
+    figure;
+    ax = gca;
+    hold on;
+    plot(a,CL,'--ro',...
+        'LineWidth',2,...
+        'MarkerSize',7.5,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor','r');
+    
+    xlabel('alpha')
+    ylabel('C_L')
+
+    for i = 1:10
+        p(i,:) = polyfit(ap(i,:),CLp(i,:),1);
+        trend(i,:) = polyval(p(i,:),a);
+        plot(a,trend(i,:),'k');
+    end
+    grid on;
+end
+matlab2tikz('monteLift.tex','height','\fheight','width','\fwidth')
+
+%% Monte Carlo for corrected lift slope uncertainty
+
+clc; clear; close all;
+
+CL =   [0
+0.32308476
+0.457573009
+0.586722313
+0.658572369];
+
+UCL = 0.07*ones(size(CL));
+
+a = [0
+3
+5
+7
+8];
+
+Ua = 0.1*ones(size(a));
+
+plotFigure = true;
+
+coeff = polyfit(CL,a,1);
+originalSlope = coeff(1)
+numPts = 10000;
+
+% Use parfor to speed up computation if necessary
+for i = 1:numPts
+    xptemp = zeros(1, length(CL));
+    yptemp = zeros(1, length(CL));
+    for j = 1:length(CL)
+        xptemp(j) = norminv(rand,a(j),Ua(j)/2);
+        yptemp(j) = norminv(rand,CL(j),UCL(j)/2);
+    end
+    coeff = polyfit(xptemp,yptemp,1);
+    slope(i) = coeff(1);
+    ap(i,:) = xptemp;
+    CLp(i,:) = yptemp;
+end
+
+avgSlope = mean(slope)
+stdDevSlope = std(slope)
+uncertainty = 1.96*(stdDevSlope/sqrt(numPts))
+
+if plotFigure
+    figure;
+    ax = gca;
+    hold on;
+    plot(a,CL,'--ro',...
+        'LineWidth',2,...
+        'MarkerSize',7.5,...
+        'MarkerEdgeColor','k',...
+        'MarkerFaceColor','r');
+    
+    xlabel('alpha')
+    ylabel('C_L')
+
+    for i = 1:10
+        p(i,:) = polyfit(ap(i,:),CLp(i,:),1);
+        trend(i,:) = polyval(p(i,:),a);
+        plot(a,trend(i,:),'k');
+    end
+    grid on;
+end
+matlab2tikz('monteLiftCor.tex','height','\fheight','width','\fwidth')

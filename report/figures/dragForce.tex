@@ -7,36 +7,38 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=0.951\fwidth,
+width=0.958\fwidth,
 height=\fheight,
 at={(0\fwidth,0\fheight)},
-scale only axis,
 xmin=0,
 xmax=14,
-xlabel style={font=\color{white!15!black}},
+xlabel style={font=\color{white!15!black}\small},
 xlabel={Angle of Attack (deg)},
 ymin=0,
-ymax=15,
-ylabel style={font=\color{white!15!black}},
+ymax=16,
+ylabel style={font=\color{white!15!black}\small},
 ylabel={Drag Force (N)},
+ytick={0,4,...,16},
 axis background/.style={fill=white},
 axis x line*=bottom,
 axis y line*=left,
 xmajorgrids,
-ymajorgrids
+ymajorgrids,
+tick label style={font=\small}
 ]
-\addplot [color=black, only marks, mark size=2.5pt, mark=*, mark options={solid, black}, forget plot]
-  table[row sep=crcr]{%
-0	1.958206345\\
-3	1.704549533\\
-5	1.592962649\\
-7	1.817184317\\
-8	2.625310249\\
-9	4.99126022\\
-10	5.728481418\\
-11	10.07077517\\
-12	13.20591133\\
-13	14.65105534\\
+\addplot [color=black, only marks, mark size=1.25pt, mark=*, mark options={solid, black}, forget plot]
+plot [error bars/.cd, x dir=both, x explicit, y dir=both, y explicit, error bar style={line width=0.5pt}, error mark options={line width=0.5pt, mark size=3.0pt, rotate=90}]
+table[row sep=crcr, y error index=2, x error index=3]{%
+0	1.958206345	0.312	0.1\\
+3	1.704549533	0.324	0.1\\
+5	1.592962649	0.339	0.1\\
+7	1.817184317	0.343	0.1\\
+8	2.625310249	0.355	0.1\\
+9	4.99126022	0.361	0.1\\
+10	5.728481418	0.369	0.1\\
+11	10.07077517	0.372	0.1\\
+12	13.20591133	0.379	0.1\\
+13	14.65105534	0.384	0.1\\
 };
 \end{axis}
 \end{tikzpicture}%

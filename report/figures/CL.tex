@@ -12,54 +12,62 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=0.951\fwidth,
+width=0.958\fwidth,
 height=\fheight,
 at={(0\fwidth,0\fheight)},
-scale only axis,
-xmin=0,
+xmin=-2,
 xmax=14,
-xlabel style={font=\color{white!15!black}},
+xlabel style={font=\color{white!15!black}\small},
 xlabel={Angle of Attack (deg)},
-ymin=0,
+ymin=-0.2,
 ymax=1.2,
-ylabel style={font=\color{white!15!black}},
-ylabel={$\text{C}_\text{L}$},
+yticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=1,
+            /pgf/number format/fixed zerofill
+        },
+ylabel style={font=\color{white!15!black}\small},
+ylabel={$C_L$},
+ytick={-0.2,0,...,1.2},
 axis background/.style={fill=white},
 axis x line*=bottom,
 axis y line*=left,
 xmajorgrids,
 ymajorgrids,
-legend style={at={(0.03,0.97)}, anchor=north west, legend cell align=left, align=left, draw=white!15!black}
+tick label style={font=\small},
+legend style={at={(0.03,0.97)}, anchor=north west, legend cell align=left, align=left, draw=white!15!black, font=\footnotesize}
 ]
-\addplot [color=mycolor1, only marks, mark=triangle*, mark options={solid, fill=mycolor2, draw=mycolor2}]
-  table[row sep=crcr]{%
-0	0\\
-3	0.336668611\\
-5	0.476583991\\
-7	0.611685107\\
-8	0.688973236\\
-9	0.816199681\\
-10	0.904484351\\
-11	0.807395364\\
-12	0.777679817\\
-13	0.760474906\\
+\addplot [color=black, only marks, mark=triangle*, mark options={solid, fill=mycolor2, draw=mycolor2}]
+plot [error bars/.cd, x dir=both, x explicit, y dir=both, y explicit, error bar style={line width=0.5pt}, error mark options={line width=0.5pt, mark size=3.0pt, rotate=90}]
+table[row sep=crcr, y error index=2, x error index=3]{%
+0	0	0.03	0.1\\
+3	0.336668611	0.034	0.1\\
+5	0.476583991	0.039	0.1\\
+7	0.611685107	0.043	0.1\\
+8	0.688973236	0.048	0.1\\
+9	0.816199681	0.052	0.1\\
+10	0.904484351	0.057	0.1\\
+11	0.807395364	0.061	0.1\\
+12	0.777679817	0.066	0.1\\
+13	0.760474906	0.07	0.1\\
 };
-\addlegendentry{Experimental Without Correction}
+\addlegendentry{Uncorrected}
 
-\addplot [color=mycolor3, only marks, mark=square*, mark options={solid, fill=mycolor4, draw=mycolor4}]
-  table[row sep=crcr]{%
-0	0\\
-3.051219576	0.32308476\\
-5.083739423	0.457573009\\
-7.117555465	0.586722313\\
-8.140641138	0.658572369\\
-9.173948407	0.77226345\\
-10.19552088	0.853060434\\
-11.17868962	0.74710964\\
-12.17634195	0.709611403\\
-13.1769283	0.689404208\\
+\addplot [color=black, only marks, mark=square*, mark options={solid, fill=mycolor4, draw=mycolor4}]
+plot [error bars/.cd, x dir=both, x explicit, y dir=both, y explicit, error bar style={line width=0.5pt}, error mark options={line width=0.5pt, mark size=3.0pt, rotate=90}]
+table[row sep=crcr, y error index=2, x error index=3]{%
+0	0	0.03	0.1\\
+3.051219576	0.32308476	0.034	0.1\\
+5.083739423	0.457573009	0.039	0.1\\
+7.117555465	0.586722313	0.043	0.1\\
+8.140641138	0.658572369	0.048	0.1\\
+9.173948407	0.77226345	0.052	0.1\\
+10.19552088	0.853060434	0.057	0.1\\
+11.17868962	0.74710964	0.061	0.1\\
+12.17634195	0.709611403	0.066	0.1\\
+13.1769283	0.689404208	0.07	0.1\\
 };
-\addlegendentry{Experimental With Correction}
+\addlegendentry{Corrected}
 
 \addplot [color=black, line width=1.2pt]
   table[row sep=crcr]{%

@@ -78,6 +78,12 @@ Section 11832 \quad October 31, 2023}
 
 \IEEEPARstart{I}{ntro}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3.5in]{shapeFactor}
+    \caption{Body shape factor for common airfoil shapes~\cite{shape}.}
+    \label{fig:shape}
+\end{figure}
 
 \section{Procedure}
 
@@ -90,6 +96,12 @@ Section 11832 \quad October 31, 2023}
     \label{fig:section}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3.5in]{airfoilPorts}
+    \caption{Pressure tap locations for the NACA 0012 airfoil used in this experiment. The chord of the airfoil is 4 inches~\cite{ports}.}
+    \label{fig:AirfoilPorts}
+\end{figure}
 
 \section{Results}
 
@@ -114,9 +126,23 @@ The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
 
 \begin{figure}[H]
     \centering
-    %\input{figures/cal.tex}
-    \caption{Hot wire anemometer calibration curve.}
-    \label{fig:cal}
+    \input{figures/liftForce.tex}
+    \caption{Lift force.}
+    \label{fig:Lift}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/dragForce.tex}
+    \caption{Drag force.}
+    \label{fig:Drag}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/moment.tex}
+    \caption{Moment.}
+    \label{fig:Moment}
 \end{figure}
 
 
@@ -125,9 +151,23 @@ The measured atmospheric conditions are summarized in Table~\ref{tab:atmCond}.
 
 \begin{figure}[H]
     \centering
-    %\input{figures/CD.tex}
-    \caption{Calibration graph for voltage velocity relation.}
-    \label{fig:calCurve}
+    \input{figures/CL.tex}
+    \caption{Lift.}
+    \label{fig:complift}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/CD.tex}
+    \caption{Drag.}
+    \label{fig:compdrag}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/CM.tex}
+    \caption{Moment.}
+    \label{fig:compmoment}
 \end{figure}
 
 
@@ -228,6 +268,20 @@ The uncertainty in the drag coefficient, $C_D$, was calculated using the RSS met
 \begin{equation} \label{eq:uCD}
     \resizebox{227pt}{!}{$\displaystyle{\mu C_D = \left[\left(\mu F_D \frac{\partial C_D}{\partial F_D}\right)^2 + \left(\mu q \frac{\partial C_D}{\partial q}\right)^2 + \left(\mu L \frac{\partial C_D}{\partial L}\right)^2\right]^{1/2}}$}
 \end{equation}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/monteLift.tex}
+    \caption{Monte Carlo simulation of uncorrected coefficient of lift data.}
+    \label{fig:Incorrect}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \input{figures/monteLiftCor.tex}
+    \caption{Monte Carlo simulation of corrected coefficient of lift data.}
+    \label{fig:Correct}
+\end{figure}
 
 \noindent
 This lab report was typeset using \LaTeX.

@@ -7,36 +7,38 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=0.951\fwidth,
+width=0.958\fwidth,
 height=\fheight,
 at={(0\fwidth,0\fheight)},
-scale only axis,
 xmin=0,
 xmax=14,
-xlabel style={font=\color{white!15!black}},
+xlabel style={font=\color{white!15!black}\small},
 xlabel={Angle of Attack (deg)},
-ymin=-2.5,
-ymax=2.5,
-ylabel style={font=\color{white!15!black}},
-ylabel={Moment (Nm)},
+ymin=-3,
+ymax=3,
+ylabel style={font=\color{white!15!black}\small},
+ylabel={Moment (\unit{\newton\meter})},
+ytick={-3,-2,...,3},
 axis background/.style={fill=white},
 axis x line*=bottom,
 axis y line*=left,
 xmajorgrids,
-ymajorgrids
+ymajorgrids,
+tick label style={font=\small}
 ]
-\addplot [color=black, only marks, mark size=2.5pt, mark=*, mark options={solid, black}, forget plot]
-  table[row sep=crcr]{%
-0	0\\
-3	-1.845242185\\
-5	-1.516790206\\
-7	-0.9641498\\
-8	-0.283300244\\
-9	0.37970687\\
-10	1.103431109\\
-11	2.041708102\\
-12	0.785569658\\
-13	-2.105218776\\
+\addplot [color=black, only marks, mark size=1.25pt, mark=*, mark options={solid, black}, forget plot]
+plot [error bars/.cd, x dir=both, x explicit, y dir=both, y explicit, error bar style={line width=0.5pt}, error mark options={line width=0.5pt, mark size=3.0pt, rotate=90}]
+table[row sep=crcr, y error index=2, x error index=3]{%
+0	0	0.121	0.1\\
+3	-1.845242185	0.158	0.1\\
+5	-1.516790206	0.153	0.1\\
+7	-0.9641498	0.144	0.1\\
+8	-0.283300244	0.146	0.1\\
+9	0.37970687	0.145	0.1\\
+10	1.103431109	0.15	0.1\\
+11	2.041708102	0.16	0.1\\
+12	0.785569658	0.148	0.1\\
+13	-2.105218776	0.161	0.1\\
 };
 \end{axis}
 \end{tikzpicture}%
