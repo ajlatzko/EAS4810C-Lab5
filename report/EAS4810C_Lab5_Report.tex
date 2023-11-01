@@ -43,9 +43,7 @@
          inter-unit-product = \ensuremath{ { } \cdot { } },
          number-unit-product = \text{ },
          group-digits = false,
-         detect-weight = true,
-         detect-inline-weight = math,
-         detect-display-math = true}
+         detect-weight = true}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -228,7 +226,7 @@ The effects of this approximation are an increase in drag, a decrease in calcula
 \subsection{Aerodynamic Coefficients Calculation}
 
 To calculate the lift and drag, the position of each port on the airfoil must be known.
-The $y$-location of each port was determined using \eqref{eq:airfoil}, where $x$ is the horizontal location of the pressure port given in Fig.~\ref{fig:AirfoilPorts} and $t$ is the maximum thickness of the airfoil as a fraction of the chord~\cite{AirfoilEq}.
+The $y$-location of each port was determined using~\eqref{eq:airfoil}, where $x$ is the horizontal location of the pressure port given in Fig.~\ref{fig:AirfoilPorts} and $t$ is the maximum thickness of the airfoil as a fraction of the chord~\cite{AirfoilEq}.
 
 \begin{equation} \label{eq:airfoil}
     \resizebox{227pt}{!}{$\displaystyle{\pm y = 5t(0.2969\sqrt{x} - 0.126x - 0.3516x^2 + 0.2843x^3 - 0.1015x^4)}$}
@@ -246,19 +244,19 @@ This is determined by obtaining the horizontal distance $\Delta x_i$ and the ver
 A method similar to a midpoint integration scheme was used to find these values.
 For example, when calculating $\Delta x_i$ for the line that the pressure measured by port 2 acts over, the distance between the midpoint between ports 1 and 2 and the midpoint between ports 2 and 3 was used.
 For ports 1 and 9, the line was extended to meet the leading edge and trailing edge of the airfoil, respectively.
-Next, \eqref{eq:airfoil} can be used to calculate the $y$ locations of each port. Then, the vertical distance $\Delta y_i$ was calculated using a similar method to $\Delta x_i$. Using these values, $L_i^*$ is computed using \eqref{eq:Lstar}.
+Next,~\eqref{eq:airfoil} can be used to calculate the $y$ locations of each port. Then, the vertical distance $\Delta y_i$ was calculated using a similar method to $\Delta x_i$. Using these values, $L_i^*$ is computed using~\eqref{eq:Lstar}.
 \begin{equation} \label{eq:Lstar}
     L_i^* = \sqrt{\left(\Delta x_i\right)^2 + \left(\Delta y_i\right)^2}
 \end{equation}
-The angle of the line that the pressure at a specific port acts over can now be calculated using \eqref{eq:Theta}, where $\theta_i$ is the angle between the centerline of the airfoil and the line that the pressure measured at port $i$ acts.
+The angle of the line that the pressure at a specific port acts over can now be calculated using~\eqref{eq:Theta}, where $\theta_i$ is the angle between the centerline of the airfoil and the line that the pressure measured at port $i$ acts.
 \begin{equation} \label{eq:Theta}
     \theta_i = \arctan\left(\frac{\Delta y_i}{\Delta x_i}\right)
 \end{equation}
-Next, using \eqref{eq:Gamma}, the angle $\gamma_i$ between the line that the pressure at port $i$ acts and the freestream is computed.
+Next, using~\eqref{eq:Gamma}, the angle $\gamma_i$ between the line that the pressure at port $i$ acts and the freestream is computed.
 \begin{equation} \label{eq:Gamma}
     \gamma_i = \theta_i - \alpha
 \end{equation}
-Using these calculations, the lift forces $L'_i$ and drag forces $D'_i$  per unit span for each port $i$ can be calculated using \eqref{eq:LiftF} and \eqref{eq:DragF}.
+Using these calculations, the lift forces $L'_i$ and drag forces $D'_i$  per unit span for each port $i$ can be calculated using~\eqref{eq:LiftF} and~\eqref{eq:DragF}.
 \begin{equation} \label{eq:LiftF}
     L'_i = P_i L_i^* \cos\left(\gamma_i\right)
 \end{equation}
@@ -270,12 +268,12 @@ These calculated lift and drag forces are then summed for all ports at a specifi
 Then, the positive angles of attack were combined with the same negative angles of attack.
 This is possible because the airfoil is symmetric and there are no ports on the bottom of the airfoil.
 
-The moments at a specific port were calculated using \eqref{eq:Moment}, where $M_i$ is the moment at port $i$, $x_i$ is the horizontal location of port $i$, $y_i$ is the horizontal location of port $i$, and $c$ is the chord length of the airfoil. The moments were taken about the quarter chord location.
+The moments at a specific port were calculated using~\eqref{eq:Moment}, where $M_i$ is the moment at port $i$, $x_i$ is the horizontal location of port $i$, $y_i$ is the horizontal location of port $i$, and $c$ is the chord length of the airfoil. The moments were taken about the quarter chord location.
 \begin{equation} \label{eq:Moment}
     M_i = L'_i\left(x_i - \frac{c}{4}\right) + D'_iy_i
 \end{equation}
 
-The coefficients of these values are calculated using \eqref{eq:CL}, \eqref{eq:CD}, and \eqref{eq:CM}, where $q$ is the dynamic pressure and $c$ is the chord of the airfoil.
+The coefficients of these values are calculated using~\eqref{eq:CL},~\eqref{eq:CD}, and~\eqref{eq:CM}, where $q$ is the dynamic pressure and $c$ is the chord of the airfoil.
 \begin{equation} \label{eq:CL}
     C_L = \frac{L'}{qc}
 \end{equation}
@@ -298,11 +296,11 @@ Previous experimentation has suggested that the percent speed increase for flow 
 \begin{equation} \label{eq:wb}
     \varepsilon_{wb} = \frac{c/h}{2}C_{Du}
 \end{equation}
-Then, it is useful to define the total percent velocity increase due to solid blockage and wake blockage as $\varepsilon$, where $\varepsilon_{sb}$ is the percent velocity increase due to solid blockage and $\varepsilon_{wb}$ is the percent velocity increase due to wake blockage as seen in \eqref{eq:ep}.
+Then, it is useful to define the total percent velocity increase due to solid blockage and wake blockage as $\varepsilon$, where $\varepsilon_{sb}$ is the percent velocity increase due to solid blockage and $\varepsilon_{wb}$ is the percent velocity increase due to wake blockage as seen in~\eqref{eq:ep}.
 \begin{equation} \label{eq:ep}
     \varepsilon = \varepsilon_{sb} + \varepsilon_{wb}
 \end{equation}
-The freestream velocity ($U_\infty$), Reynolds number ($Re$), and dynamic pressure ($q$), can then be corrected with \eqref{eq:Vu}, \eqref{eq:Reu}, and \eqref{eq:qu} respectively, where a subscript of $u$ denotes the uncorrected corresponding value.
+The freestream velocity ($U_\infty$), Reynolds number ($Re$), and dynamic pressure ($q$), can then be corrected with~\eqref{eq:Vu},~\eqref{eq:Reu}, and~\eqref{eq:qu} respectively, where a subscript of $u$ denotes the uncorrected corresponding value.
 \begin{equation} \label{eq:Vu}
     U_\infty = U_{\infty u}(1 + \varepsilon)
 \end{equation}
@@ -314,11 +312,11 @@ The freestream velocity ($U_\infty$), Reynolds number ($Re$), and dynamic pressu
 \begin{equation} \label{eq:qu}
     q = q_u(1 + \varepsilon)
 \end{equation}
-To account for the deviations in the aerodynamic force coefficients and the angle of attack, it is useful to define the wind-tunnel correction parameter, $\sigma$, with \eqref{eq:sigma} where $c$ is the chord length and $h$ is the height of the test section.
+To account for the deviations in the aerodynamic force coefficients and the angle of attack, it is useful to define the wind-tunnel correction parameter, $\sigma$, with~\eqref{eq:sigma} where $c$ is the chord length and $h$ is the height of the test section.
 \begin{equation} \label{eq:sigma}
     \sigma = \left(\frac{\pi^2}{48}\right)\left(\frac{c}{h}\right)^2
 \end{equation}
-The angle of attack $\alpha$, coefficient of lift $C_L$, coefficient of drag $C_D$, and the moment coefficient about the quarter chord $C_{M\frac{1}{4}}$ can all be corrected with \eqref{eq:alphau}, \eqref{eq:liftu}, \eqref{eq:dragu}, and \eqref{eq:Mu} respectively where a subscript of $u$ notes the uncorrected value.
+The angle of attack $\alpha$, coefficient of lift $C_L$, coefficient of drag $C_D$, and the moment coefficient about the quarter chord $C_{M\frac{1}{4}}$ can all be corrected with~\eqref{eq:alphau},~\eqref{eq:liftu},~\eqref{eq:dragu}, and~\eqref{eq:Mu} respectively where a subscript of $u$ notes the uncorrected value.
 \begin{equation} \label{eq:alphau}
     \alpha = \alpha_u + \frac{57.3\sigma}{2\pi} \left(C_{Lu} + 4C_{M\frac{1}{4}}\right)
 \end{equation}
@@ -446,14 +444,14 @@ However, the theoretical data was still outside of the uncertainty of the correc
 One possible source of error was the fact that the first pressure port on the airfoil was giving unreliable data and was the static pressures recorded at port one was discarded as outlier data.
 The experiment continued with the assumption that the pressure at port one should be port two, but it is possible that this assumption may have created some systematic error.
 It was also seen that the airfoil stalled sooner than expected.
-This occurred because of the assumptions made when XFOIL simulates an airfoil.
+This occurred because of the assumptions made when XFLR5 simulates an airfoil.
 Imperfections in the tested airfoil in lab could have also caused this to occur.
 
 The corrected data accounted for the wind tunnel issues of solid blockage, wake blockage, and streamline curvature.
 However, there are additional considerations that were not corrected for this experiment.
 One such consideration is that of horizontal buoyancy where the boundary layer thickens towards the end of the test section and causes a static pressure gradient along the axis of the test section.
 While there are methods to correct for horizontal buoyancy, addressing the issue was considered outside of the scope of this experiment.
-It is possible that the maximum percent error would have been even lower than reported if other considerations were considered.
+It is possible that the percent error would have been even lower than reported if other considerations were considered.
 Another possible addition to this experiment that improves the accuracy is the introduction of more pressure ports around the tested airfoil.
 This will let the line integral approximation become more accurate.
 Operating at a higher Reynolds number would also decrease the chance of the velocity profile interfering with the data taken at the pressure ports.
@@ -532,13 +530,13 @@ The uncertainty for the freestream velocity, $U_\infty$, was then calculated usi
     \mu U_\infty = \left[\left(\mu q \frac{\partial U_\infty}{\partial q}\right)^2 + \left(\mu \rho \frac{\partial U_\infty}{\partial \rho}\right)^2\right]^{1/2}
 \end{equation}
 
-The uncertainty for the Reynolds number, $Re$, was calculated using the RSS method as seen in~\eqref{eq:uRe}, where $U_\infty$ is the freestream velocity, $\nu$ is the dynamic viscosity of the fluid, and $L$ is the characteristic length~\cite{HeatTrans}.
+The uncertainty for the Reynolds number, $Re$, was calculated using the RSS method as seen in~\eqref{eq:uRe}, where $U_\infty$ is the freestream velocity, $\nu$ is the dynamic viscosity of the fluid, and $L$ is the characteristic length.
 
 \begin{equation} \label{eq:uRe}
     \resizebox{227pt}{!}{$\displaystyle{\mu Re = \left[\left(\mu \nu \frac{\partial Re}{\partial \nu}\right)^2 + \left(\mu U_\infty \frac{\partial Re}{\partial U_\infty}\right)^2 + \left(\mu L \frac{\partial Re}{\partial L}\right)^2\right]^{1/2}}$}
 \end{equation}
 
-The uncertainty of the drag force, $D$, was calculated by finding the uncertainty in each portion of the numeric integral with the RSS method and then applying the RSS method to each portion as seen in~\eqref{eq:uFD}, where $P$ is the port static pressure and the subscript $i$ denotes a specific port.
+The uncertainty of the drag force, $D$, was calculated by finding the uncertainty in each portion of the numerical integral with the RSS method and then applying the RSS method to each portion as seen in~\eqref{eq:uFD}, where $P_i$ is the static pressure at port $i$.
 
 \begin{equation} \label{eq:uFD}
     \mu D = \left[\sum_{i=1}^9 \left(\mu P_i x_i \sin\left(\gamma_i\right)\right)^2\right]^{1/2}
@@ -550,9 +548,9 @@ The uncertainty of the uncorrected coefficient of drag, $\mu C_{Du}$, was calcul
     \resizebox{227pt}{!}{$\displaystyle{\mu C_{Du} = \left[\left(\mu D \frac{\partial C_{Du}}{\partial D}\right)^2 + \left(\mu L \frac{\partial C_{Du}}{\partial L}\right)^2 + \left(\mu h \frac{\partial C_{Du}}{\partial h}\right)^2\right]^{1/2}}$}
 \end{equation}
 
-The uncertainty of the corrected coefficient of drag, $\mu C_D$, was calculated with the RSS method as seen in (equCD), where $C_{Du}$ is the uncorrected coefficient of drag, $\varepsilon_{sb}$ is the solid blockage correction, and $\varepsilon_{wb}$ is the wake blockage correction.
+The uncertainty of the corrected coefficient of drag, $\mu C_D$, was calculated with the RSS method as seen in~\eqref{eq:uCD}, where $C_{Du}$ is the uncorrected coefficient of drag, $\varepsilon_{sb}$ is the solid blockage correction, and $\varepsilon_{wb}$ is the wake blockage correction.
 
-\begin{equation} \label{eq:uCDu}
+\begin{equation} \label{eq:uCD}
     \resizebox{227pt}{!}{$\displaystyle{\mu C_{D} = \left[\left(\mu C_{Du} \frac{\partial C_{D}}{\partial C_{Du}}\right)^2 + \left(\mu \varepsilon_{sb} \frac{\partial C_{D}}{\partial \varepsilon_{sb}}\right)^2 + \left(\mu \varepsilon_{wb} \frac{\partial C_{D}}{\partial \varepsilon_{wb}}\right)^2\right]^{1/2}}$}
 \end{equation}
 
@@ -579,8 +577,8 @@ The Monte Carlo graph used to simulate the uncertainty in the slope are seen in 
 This lab report was typeset using \LaTeX.
 
 \begin{thebibliography}{99}
-    \bibitem{shape} Barlow, J. B., Rae, W. H., Pope, A., ``Boundary Corrections I: Basics and Two-Dimensional Cases'', \textit{Low-Speed Wind Tunnel Testing}, 3rd ed., Wiley, New York, 1999, p. 353.
     \bibitem{lab5r1} Abbitt, J. D., ``Wind Tunnel Corrections - Part 1,'' \textit{University of Florida} [PowerPoint slides], URL: \url{https://ufl.instructure.com/courses/480244/files/77543932/}, 2023.
+    \bibitem{shape} Barlow, J. B., Rae, W. H., Pope, A., ``Boundary Corrections I: Basics and Two-Dimensional Cases'', \textit{Low-Speed Wind Tunnel Testing}, 3rd ed., Wiley, New York, 1999, p. 353.
     \bibitem{lab3} Borg., A., Lam., B., Latzko, A., ``Characterizing the Wake Region of a Smooth Cylinder,'' \textit{University of Florida}, 2023.
     \bibitem{ports} Abbitt, J. D., ``Airfoil Geometries,'' \textit{University of Florida} [PDF], URL: \url{https://ufl.instructure.com/courses/480244/files/77543942/}, 2023.
     \bibitem{AirfoilEq} Jacobs, E. N., Ward, K. E., Pinkerton, R. M., ``The Characteristics of 78 Related Airfoil Sections from Tests in the Variable-Density Wind Tunnel,'' NACA Report No. 460, Jan 1933.

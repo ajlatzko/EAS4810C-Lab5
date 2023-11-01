@@ -4,13 +4,15 @@
 %  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
 %where you can also make suggestions and rate matlab2tikz.
 %
+\definecolor{mycolor1}{rgb}{0.65098,0.65098,0.65098}
+%
 \begin{tikzpicture}
 
 \begin{axis}[%
 width=0.958\fwidth,
 height=\fheight,
 at={(0\fwidth,0\fheight)},
-xmin=0,
+xmin=-1,
 xmax=8,
 xlabel style={font=\color{white!15!black}\small},
 xlabel={Angle of Attack (deg)},
@@ -30,7 +32,7 @@ xmajorgrids,
 ymajorgrids,
 tick label style={font=\small}
 ]
-\addplot [color=red, dashed, line width=2.0pt, mark size=3.8pt, mark=*, mark options={solid, fill=red, draw=black}, forget plot]
+\addplot [color=red, dashed, line width=2.0pt, mark size=3pt, mark=*, mark options={solid, fill=mycolor1, draw=black}, forget plot]
   table[row sep=crcr]{%
 0	0\\
 3	0.336668611\\
